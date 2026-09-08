@@ -1,4 +1,4 @@
-# MissSerena
+# Astrum
 
 ![Dark mode preview](screenshot.png)
 ![Light mode preview](screenshot-light.png)
@@ -35,7 +35,7 @@ A dual-mode Obsidian theme inspired by **Hypergryph** studio — the visual lang
 ## Installation
 
 1. Open **Settings → Appearance → Themes → Manage**.
-2. Click **Community themes** and search for **MissSerena**.
+2. Click **Community themes** and search for **Astrum**.
 3. **Install** and **Use**.
 
 You can also install it manually: copy this folder into your vault's `.obsidian/themes/` directory, then enable it from **Settings → Appearance**.
