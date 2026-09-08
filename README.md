@@ -5,7 +5,7 @@
 
 A dual-mode Obsidian theme inspired by **Hypergryph** studio — the visual language of *Arknights*, *Arknights: Endfield*, and *Ex Astris* (来自星尘). Designed around a black / white / gray base with **one** saturated accent color per mode, GIMP-CMYK-style tricolor accents, serif Chinese headings, and a distinct shape language: **sharp right angles in dark, soft capsule radii in light.**
 
-> Design tokens are extracted from the official websites: `ak.hypergryph.com`, `endfield.hypergryph.com`, and `exa.hypergryph.com`.
+> This is an independent, fan-made theme. It is **not affiliated with, endorsed by, or sponsored by** Hypergryph or Obsidian. The colors and design cues are *inspired by* the studio's game art direction; no official assets or code are included.
 
 ## Modes
 
