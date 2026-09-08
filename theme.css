@@ -1,0 +1,451 @@
+/* ============================================================
+   Hypergryph — 鹰角网络风格 Obsidian 主题
+   ------------------------------------------------------------
+   设计 token 提取自三个官网的 CSS 与视觉截图：
+   · 深色 = 明日方舟 ak.hypergryph.com（黑 + 科技青 #18d1ff 管激活/链接）
+           × 明日方舟：终末地 endfield.hypergryph.com（#191919 冷灰 + 警报黄 #fffa00 管状态）
+   · 浅色 = 来自星尘 exa.hypergryph.com（白 + 荧光青绿 #46f6e6 + 胶囊大圆角）
+   品牌基因：黑白灰基底 / 单一高饱和强调色 / CMYK 印刷三色装饰 /
+            中文标题衬线 / 深色直角锐利、浅色胶囊柔和
+   ============================================================ */
+
+/* ---------- 全局：字体 ---------- */
+body {
+  --font-interface-theme: -apple-system, "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --font-text-theme: -apple-system, "PingFang SC", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --font-monospace-theme: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  /* 标题字体变量：浅色默认（宋体），深色在 .theme-dark 覆盖加 Bender */
+  --hg-font-heading: "Playfair Display", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
+  /* 笔记大标题：官方变量（inline-title 字体/字号被 app.css 变量链控制，必须走变量才生效） */
+  --inline-title-font: "Playfair Display", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", serif;
+  --inline-title-size: 2.2em;
+  /* 阅读呼吸感：中文正文行高 1.7（比西文 1.5 更疏，无空格靠行距呼吸） */
+  --line-height-normal: 1.7;
+  --line-height-tight: 1.35;              /* 标题/表格用，紧凑不局促 */
+  --p-spacing: 0.9rem;                    /* 段落间距：随手一拍不过大 */
+  --heading-spacing: calc(var(--p-spacing) * 2.2); /* 标题前后留白：温和有节奏 */
+  /* 测试文档行内着色（深色默认）：CMY 青 */
+  --demo-inline-color: #00ffff;
+}
+
+/* ============================================================
+   深色模式 —— 明日方舟 × 终末地（工业 / 军工仪表）
+   ============================================================ */
+.theme-dark {
+  /* 字体分工：界面 Helvetica 常规；正文英文/数字用细体（Helvetica Neue Light），中文思源黑体；
+     标题回纯宋体（删覆盖即继承 body 默认链） */
+  --font-interface-theme: "Helvetica", "Source Han Sans SC", "PingFang SC", sans-serif;
+  --font-text-theme: "Helvetica Neue Light", "Helvetica Neue", "Source Han Sans SC", "PingFang SC", sans-serif;
+  /* 基底：终末地 #191919 系冷深灰，分层靠明度不靠阴影 */
+  --background-primary: #131316;         /* 编辑区 */
+  --background-primary-alt: #1d1f20;     /* 代码块/浮层：方舟冷灰 */
+  --background-secondary: #0b0b0d;       /* 侧栏：更深 */
+  --background-secondary-alt: #16181a;
+  --background-modifier-border: #2a2c2f; /* 细线：1px 边框语言 */
+  --background-modifier-hover: rgba(255, 255, 255, 0.05);
+  --background-modifier-active-hover: rgba(255, 250, 0, 0.08);
+
+  /* 文字：纯白三级（终末地正文 #fff / 次要 #999 / 弱化 #666） */
+  --text-normal: #f5f5f5;
+  --text-muted: #b5b5b5;
+  --text-faint: #787878;
+  --text-on-accent: #0a0a0a;             /* 黄底黑字：终末地按钮逻辑 */
+
+  /* 强调色：终末地警报黄（管交互/状态/选中） */
+  --accent-h: 58;
+  --accent-s: 100%;
+  --accent-l: 50%;
+  --interactive-accent: #fffa00;
+  --interactive-accent-hover: #ffff40;
+  --interactive-normal: #242424;
+  --interactive-hover: #2e2e2e;
+
+  /* 链接：方舟科技青（管内容链接） */
+  --link-color: #18d1ff;
+  --link-color-hover: #5ee0ff;
+  --link-external-color: #18d1ff;
+  --link-external-color-hover: #5ee0ff;
+  --link-external-decoration: none;       /* 外链与内链同逻辑：无下划线，图标已区分 */
+  --link-unresolved-color: #7ab8d0;      /* 未解析：链接青降饱和灰青，可读且暗示"断链" */
+  --link-unresolved-opacity: 1;
+  --link-unresolved-decoration-color: rgba(24, 209, 255, 0.45);
+
+  /* 选中与高亮：黄系 */
+  --text-selection: rgba(255, 250, 0, 0.28);
+  --text-highlight-bg: rgba(255, 244, 0, 0.85);  /* 实感荧光黄 */
+
+  /* 代码：黑底浅字，行内代码黄字见下方特征层 */
+  --code-background: #2b2e33;            /* 提亮两档：底色承担代码辨识 */
+  --code-normal: #d9d9d9;
+  --code-comment: #a09b8d;            /* 注释暖灰提亮，明显但不抢 */
+
+  /* 引用/表格 */
+  --blockquote-border-color: #fffa00;
+  --table-header-background: #1d1f20;
+  --table-header-color: #f2f2f2;
+  --table-row-background-hover: #242424;
+
+  /* 标签：暖金系（黄=强调语义，与加粗同族） */
+  --tag-color: #ffd83d;
+  --tag-background: rgba(255, 216, 61, 0.08);
+  --tag-border-color: rgba(255, 216, 61, 0.35);
+  --tag-color-hover: #ffe98a;
+  --tag-background-hover: rgba(255, 216, 61, 0.14);
+  --tag-border-color-hover: rgba(255, 216, 61, 0.7);
+
+  /* 文件列表 */
+  --nav-item-color: #cccccc;
+  --nav-item-color-hover: #f2f2f2;
+  --nav-item-color-active: #fffa00;
+  --nav-item-background-active: #1d1f20;
+
+  /* 复选框：黄勾黑标 */
+  --checkbox-color: #fffa00;
+  --checkbox-color-hover: #ffff40;
+  --checkbox-marker-color: #0a0a0a;
+
+  /* 其他 */
+  --hr-color: #2a2c2f;
+  --bold-color: #ffd83d; /* 暖金：黄=强调语义，降饱和不刺眼 */
+  --italic-color: #d9d9d9;
+  --list-marker-color: #ffd83d;  /* 黄：与加粗/tag 同族 */
+  --ribbon-background: #0b0b0d;
+  --titlebar-background: #0b0b0d;
+  --tab-outline-color: #2a2c2f;
+  --tab-text-color: #cccccc;
+  --tab-text-color-active: #f5f5f5;
+
+  /* 工具栏图标（ribbon/侧栏顶按钮/页签图标） */
+  --icon-color: #cccccc;
+  --icon-color-hover: #f5f5f5;
+  --icon-color-active: #ffd83d;
+  --icon-color-focused: #f5f5f5;
+  --icon-opacity: 1;
+  --scrollbar-thumb-bg: #2a2c2f;
+  --scrollbar-active-thumb-bg: #585858;
+
+  /* 圆角：直角锐利（方舟/终末地 2-4px） */
+  --radius-s: 2px;
+  --radius-m: 4px;
+  --radius-l: 6px;
+  --button-radius: 2px;
+  --input-radius: 2px;
+}
+
+/* ============================================================
+   浅色模式 —— 来自星尘（白净 / 星空 / 胶囊）
+   ============================================================ */
+.theme-light {
+  --demo-inline-color: #0abab5; /* 浅色：Tiffany */
+  /* ── 奢侈品橱窗四色体系 ─────────────────────────────
+     Chanel 黑白 = 骨架（白纸黑字）
+     Chanel 金 #C5A253 = 精致层（加粗/线条/列表符）
+     Hermès 橙 #F37021 = 行动层（交互/选中/勾选）
+     Tiffany #0ABAB5 = 信息层（链接/选区）
+     Dior 粉 #F7CACA = 柔和层（高亮/tag）
+     ──────────────────────────────────────────── */
+
+  /* 基底：Chanel 白 + 香槟暖白（金体系的底色） */
+  --background-primary: #ffffff;
+  --background-primary-alt: #f8f8f8;
+  --background-secondary: #ffffff;
+  --background-secondary-alt: #f8f8f8;
+  --background-modifier-border: #e5e5e5;
+  --background-modifier-hover: rgba(0, 0, 0, 0.04);
+  --background-modifier-active-hover: rgba(243, 112, 33, 0.10);
+
+  /* 文字：Chanel 黑三级（暖灰阶） */
+  --text-normal: #212121;
+  --text-muted: #858585;
+  --text-faint: #b8b8b8;
+  --text-on-accent: #0a0a0a;             /* 橙底黑字 */
+
+  /* 行动层：Hermès 橙（#F37021 ≈ hsl(24,90%,54%)） */
+  --accent-h: 24;
+  --accent-s: 90%;
+  --accent-l: 54%;
+  --interactive-accent: #f37021;
+  --interactive-accent-hover: #ff8a3d;
+  --interactive-normal: #ffffff;
+  --interactive-hover: #f5f5f5;
+
+  /* 信息层：Tiffany 青（文字加深保纯度，装饰用纯 #0ABAB5） */
+  --link-color: #0abab5;
+  --link-color-hover: #089994;
+  --link-external-color: #0abab5;
+  --link-external-color-hover: #089994;
+  --link-external-decoration: none;       /* 外链与内链同逻辑 */
+  --link-unresolved-color: #93cfcb;      /* Tiffany 降饱和两档：明显淡于正链，一眼区分 */
+  --link-unresolved-opacity: 1;
+  --link-unresolved-decoration-color: rgba(10, 186, 181, 0.22);
+  --text-selection: rgba(10, 186, 181, 0.25);
+
+  /* 柔和层：Dior 粉荧光笔 */
+  --text-highlight-bg: rgba(255, 145, 80, 0.28);
+
+  /* 代码：金纸底 + 金褐字（Chanel 金体系） */
+  --code-background: #f6f2eb;
+  --code-normal: #212121;
+  --code-comment: #857f6f;            /* 注释暖灰提深一档，明显但不抢 */
+
+  /* 精致层：引用/表格/线条走金 */
+  --blockquote-border-color: #e5e5e5;
+  --table-header-background: #f8f8f8;
+  --table-header-color: #1f1c18;
+  --table-row-background-hover: #fafafa;
+
+  /* 标签：Dior 粉礼盒 */
+  --tag-color: #d95b16;
+  --tag-background: rgba(243, 112, 33, 0.10);
+  --tag-border-color: rgba(243, 112, 33, 0.35);
+  --tag-color-hover: #c2410c;
+  --tag-background-hover: rgba(243, 112, 33, 0.18);
+  --tag-border-color-hover: rgba(243, 112, 33, 0.6);
+
+  /* 文件列表：当前项 Hermès 深橙 */
+  --nav-item-color: #4a4a4a;
+  --nav-item-color-hover: #212121;
+  --nav-item-color-active: #d95b16;
+  --nav-item-background-active: #f2f2f2;
+
+  /* 复选框：Hermès 橙底 + 暖白勾（黑勾突兀，换 Anthropic ivory 系白） */
+  --checkbox-color: #f37021;
+  --checkbox-color-hover: #ff8a3d;
+  --checkbox-marker-color: #fdf9f0;
+
+  /* 精致层散布：金粗、金线、金列表符 */
+  --hr-color: #e5e5e5;
+  --bold-color: #d95b16;                 /* Chanel 金深版（白底可读） */
+  --italic-color: #424242;
+  --list-marker-color: #ff7500;  /* 橘色混红，亮度不变 */
+  --ribbon-background: #ffffff;
+  --titlebar-background: #ffffff;
+  --tab-outline-color: #e5e5e5;
+  --tab-text-color: #4a4a4a;
+  --tab-text-color-active: #171717;
+
+  /* 工具栏图标：常规暖灰 / hover 近黑 / active Hermès 橙 */
+  --icon-color: #4a4a4a;
+  --icon-color-hover: #171717;
+  --icon-color-active: #d95b16;
+  --icon-color-focused: #171717;
+  --icon-opacity: 1;
+  --scrollbar-thumb-bg: #d9d9d9;
+  --scrollbar-active-thumb-bg: #b8b8b8;
+
+  /* 圆角：胶囊柔和 */
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --button-radius: 999px;
+  --input-radius: 10px;
+}
+
+/* ============================================================
+   特征层 —— 鹰角视觉基因
+   ============================================================ */
+
+/* 中文标题衬线（官网 SourceHanSerif 传统）+ 负字距（官网大标题排布基因，现代感的来源） */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-source-view.mod-cm6 .HyperMD-header-1,
+.markdown-source-view.mod-cm6 .HyperMD-header-2,
+.markdown-source-view.mod-cm6 .HyperMD-header-3 {
+  font-family: var(--hg-font-heading);
+  letter-spacing: -0.01em;
+  /* 中西分字重：Playfair 可变轴锁细（≈Light），静态 OTF 宋体忽略此轴维持粗体 */
+  font-variation-settings: "wght" 350;
+  /* 数字：lining（顶天立地）+ tabular（等宽撑满） */
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
+.inline-title:not([data-level]) {
+  /* 舰队铭牌式排版：与 app.css 同特异性（0-2-0）硬碰硬覆盖其 -0.015em 负字距；
+     字体/字号走上方官方变量 */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-variation-settings: "wght" 350;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
+
+/* H1：一条 hairline 分隔线，干净收束（现代文档风） */
+.markdown-rendered h1,
+.markdown-source-view.mod-cm6 .HyperMD-header-1 {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 6px;
+}
+
+/* 文件列表当前项：左侧强调色竖条（终末地菜单选中态） */
+.nav-file-title.is-active,
+.nav-folder-title.is-active {
+  box-shadow: inset 3px 0 0 var(--interactive-accent);
+}
+
+/* 活动标签页：底线强调色 */
+.workspace-tab-header.is-active {
+  box-shadow: inset 0 -2px 0 var(--interactive-accent);
+}
+
+/* 行内代码：深色=黑底白字（黄色系退场，可读优先；味道靠底色块） */
+.theme-dark .markdown-rendered :not(pre) > code,
+.theme-dark .markdown-source-view.mod-cm6 :not(pre) > code {
+  color: #e8e8e8;
+  border: 1px solid #3d4045;             /* 细线框：与正文区分双保险 */
+  border-radius: 6px;                    /* 与浅色模式同 R 角 */
+}
+/* 浅色=灰底深青字 + 细边框（对齐深色细线框语言） */
+.theme-light .markdown-rendered :not(pre) > code,
+.theme-light .markdown-source-view.mod-cm6 :not(pre) > code {
+  color: #3f3f3f;
+  border: 1px solid #dcdcdc;
+}
+
+/* 引用块：色条 + 深底衬 */
+.markdown-rendered blockquote {
+  border-left: 3px solid var(--blockquote-border-color);
+  background-color: var(--background-primary-alt);
+  padding: 4px 16px;
+}
+
+/* callout：统一细边框 + 小圆角（细线框语言） */
+.callout {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+}
+
+/* 深色下 Callout：边框用 CMY 色、中间底透明、文字归正文（内部语法自然显现） */
+.theme-dark .callout {
+  background-color: transparent;                 /* 中间完全透明，露出正文底 */
+}
+
+/* 边框 + 标题/图标色：CMY 三色区分（边框 2px 转深一档） */
+/* 笔记类 —— 青 Cyan */
+.theme-dark .callout[data-callout="note"],
+.theme-dark .callout[data-callout="abstract"],
+.theme-dark .callout[data-callout="summary"],
+.theme-dark .callout[data-callout="info"] {
+  border-color: rgb(0, 255, 255);
+  border-left-width: 3px;
+  --callout-color: 0, 255, 255;           /* 标题+图标青色 */
+}
+/* 警告类 —— 品红 Magenta */
+.theme-dark .callout[data-callout="warning"],
+.theme-dark .callout[data-callout="caution"],
+.theme-dark .callout[data-callout="attention"],
+.theme-dark .callout[data-callout="danger"],
+.theme-dark .callout[data-callout="error"],
+.theme-dark .callout[data-callout="bug"],
+.theme-dark .callout[data-callout="failure"],
+.theme-dark .callout[data-callout="fail"] {
+  border-color: rgb(255, 0, 255);
+  border-left-width: 3px;
+  --callout-color: 191, 0, 191;           /* 标题+图标品红（降饱和保可读） */
+}
+/* 其他类 —— 黄 Yellow */
+.theme-dark .callout[data-callout="tip"],
+.theme-dark .callout[data-callout="hint"],
+.theme-dark .callout[data-callout="important"],
+.theme-dark .callout[data-callout="todo"],
+.theme-dark .callout[data-callout="success"],
+.theme-dark .callout[data-callout="check"],
+.theme-dark .callout[data-callout="done"],
+.theme-dark .callout[data-callout="question"],
+.theme-dark .callout[data-callout="help"],
+.theme-dark .callout[data-callout="quote"],
+.theme-dark .callout[data-callout="cite"],
+.theme-dark .callout[data-callout="example"] {
+  border-color: rgb(255, 221, 0);
+  border-left-width: 3px;
+  --callout-color: 194, 168, 0;           /* 标题+图标金（深一档保可读） */
+}
+
+/* 文字全面回归正文色（不加粗原样、不强染色），让内部语法正常表达 */
+.theme-dark .callout,
+.theme-dark .callout p,
+.theme-dark .callout li,
+.theme-dark .callout .callout-title,
+.theme-dark .callout .callout-title-inner {
+  color: var(--text-normal);
+}
+/*
+ */
+/* 滚动条：细、直角（工业感） */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-bg);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-active-thumb-bg);
+}
+
+/* 状态栏：小字距（官网大写小标签的字距处理） */
+.status-bar {
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+
+/* 浅色引用块：Anthropic ivory 暖白（#faf9f5，暖而不黄的克制底） */
+.theme-light .markdown-rendered blockquote,
+.theme-light .markdown-source-view.mod-cm6 blockquote {
+  background-color: #f6f2eb;
+}
+/* 删除线：文字与线同为橙 */
+.theme-light .markdown-rendered s,
+.theme-light .markdown-rendered del,
+.theme-light .markdown-source-view.mod-cm6 .cm-strikethrough {
+  color: #d95b16;
+}
+.theme-dark .markdown-rendered s,
+.theme-dark .markdown-rendered del,
+.theme-dark .markdown-source-view.mod-cm6 .cm-strikethrough {
+  color: #d9cba4;  /* 米金：比亮金更易读 */
+}
+
+/* 已完成任务文字：默认灰改为橙（完成态=强调） */
+.theme-light .markdown-rendered .task-list-item.is-checked,
+.theme-light .markdown-source-view.mod-cm6 .task-list-item.is-checked {
+  color: #d95b16;
+}
+.theme-dark .markdown-rendered .task-list-item.is-checked,
+.theme-dark .markdown-source-view.mod-cm6 .task-list-item.is-checked {
+  color: #d9cba4;  /* 与通篇删除线同米金 */
+}
+
+/* 深色高亮：黄底黑字（真荧光笔，视觉突出） */
+.theme-dark .markdown-rendered mark,
+.theme-dark .markdown-source-view.mod-cm6 .cm-highlight {
+  color: #0a0a0a;
+}
+
+/* 加粗：深浅分权——深色 500（暗底下略轻），浅色 550（白底要分量） */
+.theme-dark .markdown-rendered strong,
+.theme-dark .markdown-source-view.mod-cm6 .cm-strong {
+  font-weight: 500;
+}
+.theme-light .markdown-rendered strong,
+.theme-light .markdown-source-view.mod-cm6 .cm-strong {
+  font-weight: 550;
+}
+
+/* 任务复选框 R 角：深浅统一（深色直角 → 与浅色同） */
+.theme-dark input[type="checkbox"].task-list-item-checkbox,
+.theme-light input[type="checkbox"].task-list-item-checkbox {
+  border-radius: 6px;
+}
+
+/* 脚注标记：强调暖色（浅橙 / 深黄） */
+.theme-light .markdown-rendered a.footnote-link,
+.theme-light .markdown-source-view.mod-cm6 .cm-footref {
+  color: #d95b16;
+}
+.theme-dark .markdown-rendered a.footnote-link,
+.theme-dark .markdown-source-view.mod-cm6 .cm-footref {
+  color: #ffd83d;
+}
