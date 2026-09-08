@@ -1,5 +1,8 @@
 # MissSerena
 
+![Dark mode preview](screenshot.png)
+![Light mode preview](screenshot-light.png)
+
 A dual-mode Obsidian theme inspired by **Hypergryph** studio — the visual language of *Arknights*, *Arknights: Endfield*, and *Ex Astris* (来自星尘). Designed around a black / white / gray base with **one** saturated accent color per mode, GIMP-CMYK-style tricolor accents, serif Chinese headings, and a distinct shape language: **sharp right angles in dark, soft capsule radii in light.**
 
 > Design tokens are extracted from the official websites: `ak.hypergryph.com`, `endfield.hypergryph.com`, and `exa.hypergryph.com`.
